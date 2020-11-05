@@ -1,0 +1,42 @@
+---
+
+#
+# defaults file for roles/scott.oracle-jdk
+#
+java_install_jce: false
+java_entropy_fix: false
+java_install_dir: /usr/java
+java_remove_download: yes
+# like a safety, set to yes in the play
+java_download_from_oracle: no
+java_download_path: /usr/local/src
+java_version: 8u171
+java_set_as_default: true
+java_set_as_latest: true
+
+# Extra certs that need to be loaded to make your place run right
+java_extra_certs: []
+#java_extra_certs:
+#  - { alias: some_cert_name, path: files/some_cert_name.crt }
+#  - { alias: some_cert_name2, path: files/some_cert_name2.crt }
+
+# Of course don't "changeit" unless you've already done so for real. Time-honoured password, this.
+java_storepass: changeit
+java_architecture: linux-x64
+
+java_versions:
+  6u19:
+    java_long_version: 1.6.0_19
+    java_download_url: ftp://192.168.0.14/JDK/linux/jdk-6u19-{{ java_architecture }}.tar.gz
+  8u181:
+    java_long_version: 1.8.0_181
+    java_download_url: ftp://192.168.0.14/JDK/linux/jdk-8u181-{{ java_architecture }}.tar.gz
+
+
+jce_versions:
+  '7':
+    jce_file_base: UnlimitedJCEPolicy
+    jce_download_url: ftp://192.168.0.14/JDK/JCE/UnlimitedJCEPolicyJDK7.zip
+  '8':
+    jce_file_base: UnlimitedJCEPolicyJDK8
+    jce_download_url: ftp://192.168.0.14/JDK/JCE/jce_policy-8.zip

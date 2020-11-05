@@ -1,0 +1,19 @@
+---
+#
+## Example to install Oracle Java SDK given that 'ansible-galaxy install scott.oracle-jdk' has been run.
+## 
+## Use implies acceptance of the Oracle license agreement.
+#
+
+- hosts: localhost
+  become: yes
+  become_user: root
+  vars:
+    java_version: 8u171
+    java_install_jce: yes 
+    java_entropy_fix: yes
+    java_remove_download: yes
+    java_download_from_oracle: yes
+  roles:
+    - role: scott.oracle-jdk
+

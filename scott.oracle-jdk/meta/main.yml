@@ -1,0 +1,25 @@
+dependencies: []
+
+galaxy_info:
+  author: Steve Taylor
+  description: Ansible role for installing one (or more!) Oracle JDK homes, and JCE on Redhat.
+  
+  # issue_tracker_url: http://example.com/issue/tracker
+  
+  license: MIT
+  
+  min_ansible_version: 2.0
+
+  #github_branch:
+  
+  platforms:
+  - name: EL
+    versions:
+    - 6
+    - 7
+  
+  galaxy_tags: 
+    - oracle
+    - java
+    - jdk
+
