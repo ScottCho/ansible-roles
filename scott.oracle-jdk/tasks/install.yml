@@ -92,6 +92,11 @@
   include: java-crypto-policy.yml
   when: java_install_jce and java_crypto_policy is defined
 
+- name: set jdk env
+  template: 
+    src: oracle-jdk.sh.j2 
+    dest: /etc/profile.d/oracle-jdk.sh
+
 - name: clean up
   file:
     path: "{{ java_download_path }}/{{ item }}"
