@@ -10,7 +10,7 @@
 
   - name: install deps for building {{ compiled_python_dist_name }}
     yum:
-      name: "{{ compiled_python3_redhat_deps  }}"
+      name: "{{ item }}"
       state: present
     with_items: "{{ compiled_python3_redhat_deps }}"
 
