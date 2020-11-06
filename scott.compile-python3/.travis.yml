@@ -1,0 +1,47 @@
+---
+# we need sudo for some of the Docker commands
+sudo: required
+
+services: docker
+
+env:
+  - distro: centos7
+    init: /usr/lib/systemd/systemd
+  - distro: centos6
+    init: /sbin/init
+  - distro: ubuntu1804
+    init: /lib/systemd/systemd
+  - distro: ubuntu1604
+    init: /lib/systemd/systemd
+  - distro: ubuntu1404
+    init: /sbin/init
+  - distro: debian9
+    init: /lib/systemd/systemd
+  - distro: debian8
+    init: /lib/systemd/systemd
+
+
+before_install:
+  # Pull container
+  - 'docker pull geerlingguy/docker-${distro}-ansible:latest'
+
+script:
+  - container_id=$(mktemp)
+  # Run container in detached state.
+  - 'docker run --detach --volume="${PWD}":/etc/ansible/roles/role_under_test:ro ${run_opts} geerlingguy/docker-${distro}-ansible:latest "${init}" > "${container_id}"'
+
+  # Ansible syntax check.
+  - 'docker exec --tty "$(cat ${container_id})" env TERM=xterm ansible-playbook /etc/ansible/roles/role_under_test/tests/test.yml --syntax-check'
+
+  # Test role.
+  - 'docker exec --tty "$(cat ${container_id})" env TERM=xterm ansible-playbook /etc/ansible/roles/role_under_test/tests/test.yml'
+
+  # Test Python3 availability
+#  - name: testing for built {{ compiled_python_dist_name }}
+#    command: python{{ compiled_python_version.rsplit('.', 1)[0] }} --version
+#    register: python_result
+#
+#  - debug: msg="{{ python_result }} is present"
+
+notifications:
+  webhooks: https://galaxy.ansible.com/api/v1/notifications/
