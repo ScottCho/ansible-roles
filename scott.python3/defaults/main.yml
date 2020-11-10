@@ -1,10 +1,12 @@
 ---
 # defaults file for smehan.python3_compiled
 compiled_python_version: 3.6.5
+python_install_dir: /usr/local/python{{ compiled_python_version }}
 compiled_python_dist_name:  "Python-{{ compiled_python_version }}"
 compiled_python_tarball: "{{ compiled_python_dist_name }}.tar.xz"
-compiled_python_build_dir: "/tmp"
-compiled_python_cleanup: False  # if true, will remove make directory after build.
+downlod_url: "ftp://192.168.0.14/Python/{{ compiled_python_tarball }}"
+compiled_python_build_dir: "/usr/local/src"
+compiled_python_cleanup: True  # if true, will remove make directory after build.
 
 # corresponding pip
 compiled_python_with_pip: True  # if true, correct pip will also be installed

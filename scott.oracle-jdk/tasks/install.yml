@@ -95,7 +95,7 @@
 - name: set jdk env
   template: 
     src: oracle-jdk.sh.j2 
-    dest: /etc/profile.d/oracle-jdk.sh
+    dest: /etc/profile.d/java.sh
 
 - name: clean up
   file:
